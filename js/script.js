@@ -1,3 +1,5 @@
+const BEGIN_YEAR = '2006-03-01';
+
 (function () {
     "use strict";
 
@@ -43,6 +45,21 @@
     });
 //========================================= portfolio filter =========================================
 
+
+    $('#working-from').html(getYears('2004-02-01'));
+    $('#beginning-from').html(getYears(BEGIN_YEAR));
+    $('#progress-code').data('years', getYears(BEGIN_YEAR));
+    $('#progress-db').data('years', getYears(BEGIN_YEAR));
+    $('#progress-js').data('years', getYears(BEGIN_YEAR));
+    $('#progress-css').data('years', getYears(BEGIN_YEAR));
+    $('#progress-zend').data('years', getYears(BEGIN_YEAR));
+    $('#progress-laravel').data('years', getYears('2012-02-01'));
+    $('#progress-symfony').data('years', getYears('2013-02-01'));
+    $('#progress-css-frameworks').data('years', getYears('2011-01-01'));
+    $('#progress-git').data('years', getYears(BEGIN_YEAR));
+    $('#progress-linux').data('years', getYears(BEGIN_YEAR));
+
+    $('#current-year').html(new Date().getFullYear());
 
     //============================ function =========================================
 
@@ -99,6 +116,14 @@ $(window).scroll(function () {
     navScroll();
 });
 //================================ function ========================================
+
+
+function getYears(date)
+{
+    date = new Date(date).getTime();
+    const today = new Date().getTime();
+    return Math.floor((today - date) / (365 * 24 * 60 * 60 * 1000));
+}
 
 function imgHover() {
     $('.thumb-img').hover(function () {
@@ -175,7 +200,7 @@ function barScroll() {
             var me = $(this);
             var pe = $(this).children('.precent-value');
             var perc = me.attr("aria-valuenow");
-            var years = me.attr("data-years");
+            var years = me.data("years");
 
             var current_perc = 0;
             var y = years == 1 ? 'year' : 'years';
